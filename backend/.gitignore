@@ -1,4 +1,5 @@
 prisma/db.*
+prisma/db-testing.*
 
 # compiled output
 /dist
