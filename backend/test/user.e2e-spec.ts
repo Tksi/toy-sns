@@ -1,10 +1,10 @@
 import { execSync } from 'node:child_process';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { PrismaService } from '../src/prisma.service';
-import { UserModule } from '../src/user/user.module';
 import type { INestApplication } from '@nestjs/common';
 import type { TestingModule } from '@nestjs/testing';
+import { PrismaService } from '@/prisma.service';
+import { UserModule } from '@/user/user.module';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
