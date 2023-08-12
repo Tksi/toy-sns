@@ -29,8 +29,6 @@ describe('UserController (e2e)', () => {
   };
 
   it('POST /user/register OK 201', async () => {
-    console.log(process.env.DATABASE_URL);
-
     return request(app.getHttpServer())
       .post('/user/register')
       .send(registerUser)
