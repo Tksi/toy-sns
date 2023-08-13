@@ -10,11 +10,3 @@ export class RegisterRequest {
   @IsNotEmpty()
   password: string;
 }
-
-export class InternalServerError {
-  @ApiProperty({ example: 500 })
-  statusCode: number;
-
-  @ApiProperty({ example: 'Internal Server Error' })
-  message: string;
-}
