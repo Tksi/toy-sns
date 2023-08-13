@@ -3,16 +3,16 @@ import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import type { INestApplication } from '@nestjs/common';
 import type { TestingModule } from '@nestjs/testing';
+import { AuthModule } from '@/auth/auth.module';
 import { PrismaService } from '@/prisma.service';
-import { UserModule } from '@/user/user.module';
 
-describe('UserController (e2e)', () => {
+describe('AuthController (e2e)', () => {
   let app: INestApplication;
   let prismaService: PrismaService;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UserModule],
+      imports: [AuthModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -28,14 +28,14 @@ describe('UserController (e2e)', () => {
     password: 'password',
   };
 
-  it('POST /user/register OK 201', async () => {
+  it('POST /auth/register OK', async () => {
     return request(app.getHttpServer())
-      .post('/user/register')
+      .post('/auth/register')
       .send(registerUser)
       .expect(201);
   });
 
-  it('POST /user/register OK DBに登録されている', async () => {
+  it('POST /auth/register OK DBに登録されている', async () => {
     // find latest user
     const registeredUser = await prismaService.user.findFirst({
       orderBy: { id: 'desc' },
@@ -44,9 +44,9 @@ describe('UserController (e2e)', () => {
     return expect(registeredUser).toMatchObject(registerUser);
   });
 
-  it('POST /user/register NG 既に同じnameが登録されている', async () => {
+  it('POST /auth/register NG 既に同じnameが登録されている', async () => {
     return request(app.getHttpServer())
-      .post('/user/register')
+      .post('/auth/register')
       .send(registerUser)
       .expect(500);
   });
