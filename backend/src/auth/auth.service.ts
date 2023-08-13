@@ -1,5 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Prisma } from '@prisma/client';
 import { RegisterRequest } from '@/auth/dto/register.dto';
 import { PrismaService } from '@/prisma.service';
 
@@ -11,13 +16,25 @@ export class AuthService {
   ) {}
 
   async register(regiserRequest: RegisterRequest) {
-    await this.prismaService.user.create({
-      data: {
-        name: regiserRequest.name,
-        //[] ハッシュ化
-        password: regiserRequest.password,
-      },
-    });
+    await this.prismaService.user
+      .create({
+        data: {
+          name: regiserRequest.name,
+          //[] ハッシュ化
+          password: regiserRequest.password,
+        },
+      })
+      .catch((err) => {
+        if (
+          err instanceof Prisma.PrismaClientKnownRequestError &&
+          // ユニーク制約違反
+          err.code === 'P2002'
+        ) {
+          throw new ConflictException();
+        }
+
+        throw err;
+      });
   }
 
   async login({ name, password }: RegisterRequest) {

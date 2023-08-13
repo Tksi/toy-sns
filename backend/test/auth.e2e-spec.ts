@@ -28,26 +28,44 @@ describe('AuthController (e2e)', () => {
     password: 'password',
   };
 
-  it('POST /auth/register OK', async () => {
-    return request(app.getHttpServer())
-      .post('/auth/register')
-      .send(registerUser)
-      .expect(201);
-  });
-
-  it('POST /auth/register OK DBに登録されている', async () => {
-    // find latest user
-    const registeredUser = await prismaService.user.findFirst({
-      orderBy: { id: 'desc' },
+  describe('POST /auth/register', () => {
+    it('OK', async () => {
+      return request(app.getHttpServer())
+        .post('/auth/register')
+        .send(registerUser)
+        .expect(201);
     });
 
-    return expect(registeredUser).toMatchObject(registerUser);
+    it('OK DBに登録されている', async () => {
+      // find latest user
+      const registeredUser = await prismaService.user.findFirst({
+        orderBy: { id: 'desc' },
+      });
+
+      return expect(registeredUser).toMatchObject(registerUser);
+    });
+
+    it('NG 既に同じnameが登録されている', async () => {
+      return request(app.getHttpServer())
+        .post('/auth/register')
+        .send(registerUser)
+        .expect(409);
+    });
   });
 
-  it('POST /auth/register NG 既に同じnameが登録されている', async () => {
-    return request(app.getHttpServer())
-      .post('/auth/register')
-      .send(registerUser)
-      .expect(500);
+  describe('POST /auth/login', () => {
+    it('OK', async () => {
+      return request(app.getHttpServer())
+        .post('/auth/login')
+        .send(registerUser)
+        .expect(201);
+    });
+
+    it('NG パスワードが間違っている', async () => {
+      return request(app.getHttpServer())
+        .post('/auth/login')
+        .send({ ...registerUser, password: 'wrong password' })
+        .expect(401);
+    });
   });
 });

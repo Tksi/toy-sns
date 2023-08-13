@@ -15,3 +15,11 @@ export class Unauthorized {
   @ApiProperty({ example: 'Unauthorized' })
   message: string;
 }
+
+export class Conflict {
+  @ApiProperty({ example: 409 })
+  statusCode: number;
+
+  @ApiProperty({ example: 'Conflict' })
+  message: string;
+}

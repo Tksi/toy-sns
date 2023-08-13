@@ -1,21 +1,12 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { AuthGuard } from './auth.guard';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginResponce } from './dto/login.dto';
-import { InternalServerError, Unauthorized } from '@/apiType/error.dto';
+import {
+  Conflict,
+  InternalServerError,
+  Unauthorized,
+} from '@/apiType/error.dto';
 import { RegisterRequest } from '@/auth/dto/register.dto';
 
 @ApiTags('auth')
@@ -26,6 +17,11 @@ export class AuthController {
   @Post('register')
   @ApiOperation({ summary: 'ユーザ登録' })
   @ApiResponse({ status: 201, description: 'OK' })
+  @ApiResponse({
+    status: 401,
+    description: 'Conflict',
+    type: Conflict,
+  })
   @ApiResponse({
     status: 500,
     description: 'Internal server error',
@@ -45,13 +41,5 @@ export class AuthController {
   })
   async login(@Body() loginRequest: RegisterRequest) {
     return this.authService.login(loginRequest);
-  }
-
-  @Get('me')
-  @ApiOperation({ summary: 'ログイン中のユーザ情報取得' })
-  @UseGuards(AuthGuard)
-  @ApiBearerAuth()
-  async me(@Request() req) {
-    return req.user;
   }
 }
