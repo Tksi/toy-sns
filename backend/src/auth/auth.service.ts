@@ -5,8 +5,11 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Prisma } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 import { RegisterRequest } from '@/auth/dto/register.dto';
 import { PrismaService } from '@/prisma.service';
+
+export const salt = bcrypt.genSalt().then((salt) => salt);
 
 @Injectable()
 export class AuthService {
@@ -20,8 +23,7 @@ export class AuthService {
       .create({
         data: {
           name: regiserRequest.name,
-          //[] ハッシュ化
-          password: regiserRequest.password,
+          password: await bcrypt.hash(regiserRequest.password, await salt),
         },
       })
       .catch((err) => {
@@ -42,7 +44,7 @@ export class AuthService {
       where: { name },
     });
 
-    if (user?.password !== password) {
+    if (!(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException();
     }
 

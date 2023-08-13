@@ -1,9 +1,11 @@
 import { execSync } from 'node:child_process';
 import { Test } from '@nestjs/testing';
+import * as bcrypt from 'bcrypt';
 import * as request from 'supertest';
 import type { INestApplication } from '@nestjs/common';
 import type { TestingModule } from '@nestjs/testing';
 import { AuthModule } from '@/auth/auth.module';
+import { salt } from '@/auth/auth.service';
 import { PrismaService } from '@/prisma.service';
 
 describe('AuthController (e2e)', () => {
@@ -42,7 +44,15 @@ describe('AuthController (e2e)', () => {
         orderBy: { id: 'desc' },
       });
 
-      return expect(registeredUser).toMatchObject(registerUser);
+      const hashedPassword = await bcrypt.hash(
+        registerUser.password,
+        await salt,
+      );
+
+      return expect(registeredUser).toMatchObject({
+        ...registerUser,
+        password: hashedPassword,
+      });
     });
 
     it('NG 既に同じnameが登録されている', async () => {
