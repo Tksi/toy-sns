@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "npm run lint -- --fix; prettier --cache --ignore-unknown --write --log-level warn '{,!(node_modules)/**/}*'",
+    "format-check": "prettier --cache --ignore-unknown --check '{,!(node_modules)/**/}*'",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -18,6 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "DATABASE_URL='file:./db-testing.sqlite' jest --config ./test/jest-e2e.json",
+    "type": "tsc --noEmit",
     "migrate": "prisma migrate dev",
     "migrate:reset": "prisma migrate reset",
     "studio": "prisma studio"

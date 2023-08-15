@@ -1,0 +1,24 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: cd ./backend
+      - run: npm ci
+      - run: npm run format-check
+      - run: npm run lint
+      - run: npm run type
+      - run: npm run test
