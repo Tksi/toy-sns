@@ -9,6 +9,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
+    'prettier',
   ],
   root: true,
   env: {
@@ -73,6 +74,7 @@ module.exports = {
       'warn',
       { selector: 'typeLike', format: ['PascalCase'] },
     ],
+    '@typescript-eslint/sort-type-constituents': 'warn',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'unicorn/prefer-top-level-await': 'off',
