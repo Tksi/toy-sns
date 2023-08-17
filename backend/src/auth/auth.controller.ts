@@ -3,6 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginResponce } from './dto/login.dto';
 import {
+  BadRequest,
   Conflict,
   InternalServerError,
   Unauthorized,
@@ -17,6 +18,11 @@ export class AuthController {
   @Post('register')
   @ApiOperation({ summary: 'ユーザ登録' })
   @ApiResponse({ status: 201, description: 'OK' })
+  @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
   @ApiResponse({
     status: 401,
     description: 'Conflict',
@@ -35,9 +41,19 @@ export class AuthController {
   @ApiOperation({ summary: 'ログイン' })
   @ApiResponse({ status: 201, description: 'OK', type: LoginResponce })
   @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
+  @ApiResponse({
     status: 401,
     description: 'Unauthorized',
     type: Unauthorized,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+    type: InternalServerError,
   })
   async login(@Body() loginRequest: RegisterRequest) {
     return this.authService.login(loginRequest);
