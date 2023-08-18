@@ -19,6 +19,7 @@ jobs:
           node-version: lts/*
           cache: npm
           cache-dependency-path: ./backend/package-lock.json
+      - run: cp .env.example .env
       - run: npm ci
       - run: npm run format-check
       - run: npm run lint

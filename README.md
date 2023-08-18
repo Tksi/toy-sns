@@ -13,3 +13,5 @@ cp .env.example .env
 npm run migrate
 npm run start:dev
 ```
+
+API Spec http://localhost:4000/api
