@@ -8,8 +8,8 @@
 
 ```bash
 cd backend
-npm install
 cp .env.example .env
+npm install
 npm run migrate
 npm run start:dev
 ```
