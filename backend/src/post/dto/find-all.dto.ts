@@ -4,7 +4,7 @@ class User {
   @ApiProperty({ example: 1 })
   id: number;
 
-  @ApiProperty({ example: 'John' })
+  @ApiProperty({ example: 'test' })
   name: string;
 }
 
