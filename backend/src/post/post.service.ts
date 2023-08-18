@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRequest } from './dto/create.dto';
 import { PrismaService } from '@/prisma.service';
 
@@ -32,5 +32,35 @@ export class PostService {
         },
       },
     });
+  }
+
+  async findByUser(name: string) {
+    const posts = await this.prismaService.post.findMany({
+      where: {
+        user: {
+          name,
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        content: true,
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (posts.length === 0) {
+      throw new NotFoundException();
+    }
+
+    return posts;
   }
 }
