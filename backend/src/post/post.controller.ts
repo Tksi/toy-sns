@@ -6,7 +6,12 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateRequest } from './dto/create.dto';
 import { FindAllResponce } from './dto/find-all.dto';
 import { PostService } from './post.service';
@@ -25,6 +30,7 @@ export class PostController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
+  @ApiOperation({ summary: '投稿' })
   @ApiResponse({ status: 201, description: 'OK' })
   @ApiResponse({
     status: 400,
@@ -48,6 +54,7 @@ export class PostController {
   @Get()
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
+  @ApiOperation({ summary: '投稿一覧取得' })
   @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
   @ApiResponse({
     status: 401,
