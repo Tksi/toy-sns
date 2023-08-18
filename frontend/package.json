@@ -6,11 +6,19 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .ts --cache --cache-location node_modules/.cache/.eslintcache",
+    "format": "npm run lint -- --fix; prettier . --cache --write --log-level warn",
+    "format-check": "prettier --cache --ignore-unknown --check .",
+    "type": "npx -y nuxi typecheck"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/node": "^18.17.3",
-    "nuxt": "^3.6.5"
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "nuxt": "^3.6.5",
+    "prettier": "^3.0.2"
   }
 }
