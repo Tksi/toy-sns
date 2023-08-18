@@ -14,4 +14,23 @@ export class PostService {
       },
     });
   }
+
+  async findAll() {
+    return this.prismaService.post.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        content: true,
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+  }
 }
