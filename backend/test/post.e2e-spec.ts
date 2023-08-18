@@ -71,4 +71,21 @@ describe('PostController (e2e)', () => {
         .expect(401);
     });
   });
+
+  describe('GET /post', () => {
+    it('OK', async () => {
+      return request(app.getHttpServer())
+        .get('/post')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body).toHaveLength(1);
+          expect(res.body[0]).toMatchObject(registerPost);
+        });
+    });
+
+    it('NG tokenがない', async () => {
+      return request(app.getHttpServer()).get('/post').expect(401);
+    });
+  });
 });

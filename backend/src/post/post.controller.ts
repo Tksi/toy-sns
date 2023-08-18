@@ -1,6 +1,14 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateRequest } from './dto/create.dto';
+import { FindAllResponce } from './dto/find-all.dto';
 import { PostService } from './post.service';
 import {
   BadRequest,
@@ -35,5 +43,23 @@ export class PostController {
   })
   async create(@Body() createRequest: CreateRequest, @Request() req) {
     return this.postService.create(createRequest, req.user.id);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+    type: Unauthorized,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+    type: InternalServerError,
+  })
+  async findAll() {
+    return this.postService.findAll();
   }
 }
