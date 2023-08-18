@@ -34,3 +34,11 @@ export class Conflict {
   @ApiProperty({ example: 409 })
   statusCode: number;
 }
+
+export class NotFound {
+  @ApiProperty({ example: 'Not Found' })
+  message: string;
+
+  @ApiProperty({ example: 404 })
+  statusCode: number;
+}

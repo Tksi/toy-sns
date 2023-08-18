@@ -88,4 +88,28 @@ describe('PostController (e2e)', () => {
       return request(app.getHttpServer()).get('/post').expect(401);
     });
   });
+
+  describe('GET /post/:name', () => {
+    it('OK', async () => {
+      return request(app.getHttpServer())
+        .get('/post/test')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body).toHaveLength(1);
+          expect(res.body[0]).toMatchObject(registerPost);
+        });
+    });
+
+    it('NG 存在しないユーザ', async () => {
+      return request(app.getHttpServer())
+        .get('/post/test2')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404);
+    });
+
+    it('NG tokenがない', async () => {
+      return request(app.getHttpServer()).get('/post/test').expect(401);
+    });
+  });
 });
