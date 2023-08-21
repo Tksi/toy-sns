@@ -1,6 +1,6 @@
 import createClient from 'openapi-fetch';
-import type { paths } from 'types';
 import { useRuntimeConfig } from '#imports';
+import type { paths } from 'types';
 
 const runtimeConfig = useRuntimeConfig();
 
