@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // cors
+  app.enableCors();
   // swagger
   const options = new DocumentBuilder()
     .setTitle('toy-sns')

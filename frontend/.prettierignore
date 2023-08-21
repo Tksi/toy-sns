@@ -4,3 +4,5 @@
 .nitro/
 .cache/
 dist/
+types/
+auto-imports.d.ts

@@ -10,15 +10,31 @@
     "lint": "eslint . --ext .ts --cache --cache-location node_modules/.cache/.eslintcache",
     "format": "npm run lint -- --fix; prettier . --cache --write --log-level warn",
     "format-check": "prettier --cache --ignore-unknown --check .",
-    "type": "npx -y nuxi typecheck"
+    "type": "npx -y nuxi typecheck",
+    "type-gen": "openapi-typescript http://localhost:4000/api-json -o ./types/index.ts",
+    "test": "vitest run",
+    "test:open": "vitest --ui"
   },
   "devDependencies": {
+    "@invictus.codes/nuxt-vuetify": "^0.3.0",
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/node": "^18.17.3",
+    "@vitejs/plugin-vue": "^4.3.2",
+    "@vitest/ui": "^0.34.2",
+    "@vue/test-utils": "^2.4.1",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
+    "jsdom": "^22.1.0",
     "nuxt": "^3.6.5",
-    "prettier": "^3.0.2"
+    "openapi-typescript": "^6.5.0",
+    "prettier": "^3.0.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "unplugin-auto-import": "^0.16.6",
+    "vite-plugin-vuetify": "^1.0.2",
+    "vitest": "^0.34.2"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.7.4"
   }
 }
