@@ -33,5 +33,8 @@
     "unplugin-auto-import": "^0.16.6",
     "vite-plugin-vuetify": "^1.0.2",
     "vitest": "^0.34.2"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.7.4"
   }
 }
