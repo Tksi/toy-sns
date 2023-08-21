@@ -22,7 +22,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './'),
-      '#imports': path.resolve(__dirname, './.nuxt/imports.d.ts'),
     },
   },
 });

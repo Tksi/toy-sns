@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="form" @submit.prevent="onSubmit">
-    <NameInput v-model:name="name" />
-    <PasswordInput v-model:password="password" />
+    <AtomsNameInput v-model:name="name" />
+    <AtomsPasswordInput v-model:password="password" />
     <br />
     <v-btn block :disabled="!form" type="submit" variant="outlined"
       >Register</v-btn
@@ -10,10 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import NameInput from '@/components/atoms/NameInput.vue';
-import PasswordInput from '@/components/atoms/PasswordInput.vue';
-import { useClient } from '@/composables';
-
 const { POST } = useClient();
 const form = ref(false);
 const name = ref('');
