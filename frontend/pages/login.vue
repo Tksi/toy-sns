@@ -2,7 +2,7 @@
   <v-app>
     <div class="d-flex justify-center align-center h-screen">
       <v-responsive max-width="200px">
-        <OrganismsRegisterForm />
+        <OrganismsLoginForm />
       </v-responsive>
     </div>
   </v-app>
