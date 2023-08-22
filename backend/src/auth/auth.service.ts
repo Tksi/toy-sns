@@ -44,6 +44,8 @@ export class AuthService {
       where: { name },
     });
 
+    if (!user) throw new UnauthorizedException();
+
     if (!(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException();
     }
