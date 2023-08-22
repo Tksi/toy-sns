@@ -1,23 +1,12 @@
 /// <reference types="vitest" />
 import path from 'node:path';
-import vue from '@vitejs/plugin-vue';
-import AutoImport from 'unplugin-auto-import/vite';
-import { defineConfig } from 'vite';
+import { defineVitestConfig } from 'nuxt-vitest/config';
 import vuetify from 'vite-plugin-vuetify';
 
-export default defineConfig({
-  plugins: [
-    vue(),
-    vuetify(),
-    AutoImport({
-      imports: ['vue'],
-    }),
-  ],
+export default defineVitestConfig({
+  plugins: [vuetify()],
   test: {
-    environment: 'jsdom',
-    deps: {
-      inline: ['vuetify'],
-    },
+    environment: 'happy-dom',
   },
   resolve: {
     alias: {
