@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="form" @submit.prevent="onSubmit">
+  <v-form v-model="form" class="w-100" @submit.prevent="onSubmit">
     <AtomsNameInput v-model:name="name" />
     <AtomsPasswordInput v-model:password="password" />
     <br />

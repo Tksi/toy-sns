@@ -1,9 +1,13 @@
 <template>
   <v-app>
     <div class="d-flex justify-center align-center h-screen">
-      <v-responsive max-width="200px">
+      <div
+        class="d-flex justify-center align-center flex-column"
+        style="width: 200px"
+      >
         <OrganismsRegisterForm />
-      </v-responsive>
+        <AtomsGrayLink link="/login" text="Login" />
+      </div>
     </div>
   </v-app>
 </template>

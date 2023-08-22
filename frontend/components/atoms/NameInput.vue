@@ -9,13 +9,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-});
-defineEmits(['update:name']);
+defineProps<{
+  name: string;
+}>();
+defineEmits<{
+  'update:name': [];
+}>();
 
 const required = (v: string) => !!v || 'Required';
 </script>
