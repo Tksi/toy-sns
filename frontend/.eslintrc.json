@@ -3,7 +3,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
-    "@nuxtjs/eslint-config-typescript",
+    "@nuxt/eslint-config",
     "prettier"
   ],
   "plugins": ["import"],
