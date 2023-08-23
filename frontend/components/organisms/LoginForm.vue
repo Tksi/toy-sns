@@ -14,7 +14,7 @@ const { POST } = useClient();
 const form = ref(false);
 const name = ref('');
 const password = ref('');
-const errorMessage = ref('');
+const { $authErrorHandler } = useNuxtApp();
 
 const onSubmit = () => {
   POST('/auth/login', {
@@ -24,25 +24,8 @@ const onSubmit = () => {
     },
   }).then((res) => {
     if (res.error) {
-      switch (res.error.statusCode) {
-        case 401: {
-          errorMessage.value = 'Invalid name or password';
-
-          break;
-        }
-
-        default: {
-          if (Array.isArray(res.error.message)) {
-            errorMessage.value = res.error.message.join(', ');
-          } else {
-            errorMessage.value = res.error.message;
-          }
-
-          break;
-        }
-      }
-
-      alert(errorMessage.value);
+      const errorMessage = $authErrorHandler(res.error);
+      alert(errorMessage);
     } else {
       localStorage.setItem('token', res.data.token);
       navigateTo('/');

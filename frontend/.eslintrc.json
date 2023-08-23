@@ -1,12 +1,10 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:unicorn/recommended",
-    "@nuxt/eslint-config",
-    "prettier"
-  ],
+  "extends": ["plugin:unicorn/recommended", "@nuxt/eslint-config", "prettier"],
   "plugins": ["import"],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
   "rules": {
     "camelcase": "warn",
     "eqeqeq": "warn",
@@ -29,7 +27,12 @@
         "prev": "*",
         "next": ["block-like", "return", "throw", "export", "break", "continue"]
       },
-      { "blankLine": "always", "prev": "block-like", "next": "*" }
+      { "blankLine": "always", "prev": "block-like", "next": "*" },
+      {
+        "blankLine": "never",
+        "prev": ["case", "default"],
+        "next": ["case", "default"]
+      }
     ],
     "sort-imports": ["warn", { "ignoreDeclarationSort": true }],
     "import/order": [
@@ -106,6 +109,12 @@
       "rules": {
         "import/no-default-export": "off",
         "unicorn/prefer-module": "off"
+      }
+    },
+    {
+      "files": ["{middleware,plugins}/**/*.{js,ts}"],
+      "rules": {
+        "import/no-default-export": "off"
       }
     }
   ]
