@@ -11,19 +11,11 @@
 </template>
 
 <script setup lang="ts">
-type Post = {
-  id: number;
-  content: string;
-  createdAt: string;
-  user: {
-    id: number;
-    name: string;
-  };
-};
+import type { components } from 'types';
 
 const { GET } = useClient();
 const route = useRoute();
-const posts = ref<Post[]>([]);
+const posts = ref<components['schemas']['FindAllResponce'][]>([]);
 const { $postErrorHandler } = useNuxtApp();
 
 GET('/post/{name}', {
