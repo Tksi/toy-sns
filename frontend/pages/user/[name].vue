@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h1>{{ route.params.name }}</h1>
     <ul>
       <li v-for="post in posts" :key="post.id">
+        <p>{{ post.user.name }}</p>
         <p>{{ post.content }}</p>
         <p>{{ post.createdAt }}</p>
-        <p>{{ post.user.name }}</p>
       </li>
     </ul>
   </div>
@@ -25,6 +24,7 @@ type Post = {
 const { GET } = useClient();
 const route = useRoute();
 const posts = ref<Post[]>([]);
+const { $postErrorHandler } = useNuxtApp();
 
 GET('/post/{name}', {
   params: {
@@ -34,26 +34,8 @@ GET('/post/{name}', {
   },
 }).then((res) => {
   if (res.error) {
-    switch (res.error.statusCode) {
-      case 404: {
-        navigateTo('/');
-
-        break;
-      }
-      case 401: {
-        navigateTo('/login');
-
-        break;
-      }
-      case 500: {
-        alert(res.error.message);
-
-        break;
-      }
-    }
-  }
-
-  if (res.data) {
+    $postErrorHandler(res.error);
+  } else {
     posts.value = res.data;
   }
 });
