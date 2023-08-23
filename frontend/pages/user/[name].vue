@@ -14,14 +14,14 @@
 import type { components } from 'types';
 
 const { GET } = useClient();
-const route = useRoute();
+const { params } = useRoute();
 const posts = ref<components['schemas']['FindAllResponce'][]>([]);
 const { $postErrorHandler } = useNuxtApp();
 
 GET('/post/{name}', {
   params: {
     path: {
-      name: route.params.name as string,
+      name: params.name as string,
     },
   },
 }).then((res) => {
