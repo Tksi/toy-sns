@@ -3,8 +3,6 @@ import { mountSuspended as mount } from 'nuxt-vitest/utils';
 import { describe, expect, it } from 'vitest';
 import Post from './Post.vue';
 
-const config = {};
-
 const post = {
   id: 1,
   content: 'Lorem ipsum dolor sit amet',
@@ -18,7 +16,6 @@ const post = {
 describe('Post', () => {
   it('renders the user name as a NuxtLink component', async () => {
     const wrapper = await mount(Post, {
-      ...config,
       props: {
         post,
       },
@@ -32,7 +29,6 @@ describe('Post', () => {
 
   it('renders the post content', async () => {
     const wrapper = await mount(Post, {
-      ...config,
       props: {
         post,
       },
@@ -45,7 +41,6 @@ describe('Post', () => {
 
   it('renders the post creation time using $timeAgo', async () => {
     const wrapper = await mount(Post, {
-      ...config,
       props: {
         post,
       },
