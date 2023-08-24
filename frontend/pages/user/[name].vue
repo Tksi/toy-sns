@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="post in posts" :key="post.id">
-        <p>{{ post.user.name }}</p>
-        <p>{{ post.content }}</p>
-        <p>{{ post.createdAt }}</p>
-      </li>
-    </ul>
-  </div>
+  <v-app>
+    <div class="d-flex justify-center align-center flex-column">
+      <div class="posts">
+        <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
+      </div>
+    </div>
+  </v-app>
 </template>
 
 <script setup lang="ts">
@@ -32,3 +30,11 @@ GET('/post/{name}', {
   }
 });
 </script>
+
+<style scoped>
+.posts {
+  width: 100dvw;
+  max-width: 300px;
+  border: 1px solid #ccc;
+}
+</style>
