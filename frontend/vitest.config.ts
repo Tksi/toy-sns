@@ -6,7 +6,7 @@ import vuetify from 'vite-plugin-vuetify';
 export default defineVitestConfig({
   plugins: [vuetify()],
   test: {
-    environment: 'happy-dom',
+    environment: 'nuxt',
   },
   resolve: {
     alias: {

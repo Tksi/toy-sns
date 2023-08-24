@@ -1,15 +1,10 @@
-import { mount } from '@vue/test-utils';
+import { mountSuspended as mount } from 'nuxt-vitest/utils';
 import { describe, expect, it } from 'vitest';
-import { createVuetify } from 'vuetify';
 import NameInput from './NameInput.vue';
 
-const vuetify = createVuetify();
-global.ResizeObserver = require('resize-observer-polyfill');
-
 describe('NameInput', () => {
-  it('renders a v-text-field', () => {
-    const wrapper = mount(NameInput, {
-      global: { plugins: [vuetify] },
+  it('renders a v-text-field', async () => {
+    const wrapper = await mount(NameInput, {
       props: {
         name: '',
       },
@@ -19,8 +14,7 @@ describe('NameInput', () => {
   });
 
   it('emits an update:name event when the input value changes', async () => {
-    const wrapper = mount(NameInput, {
-      global: { plugins: [vuetify] },
+    const wrapper = await mount(NameInput, {
       props: {
         name: '',
       },
@@ -34,8 +28,7 @@ describe('NameInput', () => {
   });
 
   it('validates that the input is required', async () => {
-    const wrapper = mount(NameInput, {
-      global: { plugins: [vuetify] },
+    const wrapper = await mount(NameInput, {
       props: {
         name: '',
       },

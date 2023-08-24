@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="form" @submit.prevent="onSubmit">
+  <v-form v-model="form" class="w-100" @submit.prevent="onSubmit">
     <AtomsNameInput v-model:name="name" />
     <AtomsPasswordInput v-model:password="password" />
     <br />
@@ -14,7 +14,7 @@ const { POST } = useClient();
 const form = ref(false);
 const name = ref('');
 const password = ref('');
-const errorMessage = ref('');
+const { $authErrorHandler } = useNuxtApp();
 
 const onSubmit = () => {
   POST('/auth/register', {
@@ -24,25 +24,8 @@ const onSubmit = () => {
     },
   }).then((res) => {
     if (res.error) {
-      switch (res.error.statusCode) {
-        case 409: {
-          errorMessage.value = 'Name already exists';
-
-          break;
-        }
-
-        default: {
-          if (Array.isArray(res.error.message)) {
-            errorMessage.value = res.error.message.join(', ');
-          } else {
-            errorMessage.value = res.error.message;
-          }
-
-          break;
-        }
-      }
-
-      alert(errorMessage.value);
+      const errorMessage = $authErrorHandler(res.error);
+      alert(errorMessage);
     } else {
       alert('Registered!');
       navigateTo('/login');

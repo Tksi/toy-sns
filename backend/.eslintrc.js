@@ -43,6 +43,11 @@ module.exports = {
         next: ['block-like', 'return', 'throw', 'export', 'break', 'continue'],
       },
       { blankLine: 'always', prev: 'block-like', next: '*' },
+      {
+        blankLine: 'never',
+        prev: ['case', 'default'],
+        next: ['case', 'default'],
+      },
     ],
     'sort-imports': ['warn', { ignoreDeclarationSort: true }],
     'import/order': [
