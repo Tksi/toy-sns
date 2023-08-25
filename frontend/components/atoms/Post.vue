@@ -8,7 +8,7 @@
         $timeAgo().format(new Date(post.createdAt))
       }}</small>
     </div>
-    <p class="content">{{ post.content }}</p>
+    <pre class="content">{{ post.content }}</pre>
   </div>
 </template>
 
