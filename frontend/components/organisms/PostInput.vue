@@ -1,0 +1,58 @@
+<template>
+  <div class="container">
+    <v-textarea
+      :value="message"
+      placeholder="message"
+      variant="solo"
+      rows="1"
+      auto-grow
+      @input="$emit('update:message', $event.target.value)"
+    ></v-textarea>
+    <v-btn
+      :disabled="message.length === 0"
+      icon="mdi-send"
+      size="small"
+      color="black"
+      @click="onClick"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const { POST } = useClient();
+
+const props = defineProps<{
+  message: string;
+}>();
+const emit = defineEmits<{
+  'update:message': [];
+  then: [];
+}>();
+
+const onClick = () => {
+  POST('/post', {
+    body: {
+      content: props.message,
+    },
+  }).then((res) => {
+    if (res.error) {
+      alert(res.error);
+    } else {
+      emit('then');
+    }
+  });
+};
+</script>
+
+<style scoped>
+.container {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.v-btn {
+  margin-left: 5px;
+  margin-bottom: 22px;
+}
+</style>

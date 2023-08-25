@@ -1,11 +1,9 @@
 <template>
-  <v-app>
-    <div class="d-flex justify-center align-center flex-column">
-      <div class="posts">
-        <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
-      </div>
+  <div class="d-flex justify-center align-center flex-column">
+    <div class="posts">
+      <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -16,18 +14,32 @@ const { params } = useRoute();
 const posts = ref<components['schemas']['FindAllResponce'][]>([]);
 const { $postErrorHandler } = useNuxtApp();
 
-GET('/post/{name}', {
-  params: {
-    path: {
-      name: params.name as string,
+const fetchPosts = () => {
+  GET('/post/{name}', {
+    params: {
+      path: {
+        name: params.name as string,
+      },
     },
-  },
-}).then((res) => {
-  if (res.error) {
-    $postErrorHandler(res.error);
-  } else {
-    posts.value = res.data;
-  }
+  }).then((res) => {
+    if (res.error) {
+      $postErrorHandler(res.error);
+    } else {
+      posts.value = res.data;
+    }
+  });
+};
+
+let interval: NodeJS.Timeout;
+onMounted(() => {
+  fetchPosts();
+  interval = setInterval(() => {
+    fetchPosts();
+  }, 3000);
+});
+
+onUnmounted(() => {
+  clearInterval(interval);
 });
 </script>
 

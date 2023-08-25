@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
       authErrorHandler(error: {
         message: string[] | string;
         statusCode: number;
-      }): string {
+      }) {
         let errorMessage = error.message;
 
         switch (error.statusCode) {
@@ -18,20 +18,15 @@ export default defineNuxtPlugin(() => {
 
             break;
           }
-          case 500: {
-            alert(error.message);
-
-            break;
-          }
         }
 
         if (Array.isArray(errorMessage)) {
           errorMessage = errorMessage.join(', ');
         }
 
-        return errorMessage;
+        alert(errorMessage);
       },
-      postErrorHandler(error: { message: string; statusCode: number }): string {
+      postErrorHandler(error: { message: string; statusCode: number }) {
         switch (error.statusCode) {
           case 401: {
             localStorage.removeItem('token');
@@ -44,14 +39,9 @@ export default defineNuxtPlugin(() => {
 
             break;
           }
-          case 500: {
-            alert(error.message);
-
-            break;
-          }
         }
 
-        return error.message;
+        alert(error.message);
       },
     },
   };

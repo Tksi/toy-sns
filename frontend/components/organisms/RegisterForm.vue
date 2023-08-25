@@ -24,8 +24,7 @@ const onSubmit = () => {
     },
   }).then((res) => {
     if (res.error) {
-      const errorMessage = $authErrorHandler(res.error);
-      alert(errorMessage);
+      $authErrorHandler(res.error);
     } else {
       alert('Registered!');
       navigateTo('/login');
