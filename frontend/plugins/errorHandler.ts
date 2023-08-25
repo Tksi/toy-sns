@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 export default defineNuxtPlugin(() => {
   return {
     provide: {
@@ -24,24 +26,41 @@ export default defineNuxtPlugin(() => {
           errorMessage = errorMessage.join(', ');
         }
 
-        alert(errorMessage);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage,
+        });
       },
-      postErrorHandler(error: { message: string; statusCode: number }) {
+      postErrorHandler(error: {
+        message: string[] | string;
+        statusCode: number;
+      }) {
         switch (error.statusCode) {
           case 401: {
             localStorage.removeItem('token');
             navigateTo('/login');
 
-            break;
+            return;
           }
           case 404: {
             navigateTo('/');
 
-            break;
+            return;
           }
         }
 
-        alert(error.message);
+        let errorMessage = error.message;
+
+        if (Array.isArray(errorMessage)) {
+          errorMessage = errorMessage.join(', ');
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage,
+        });
       },
     },
   };

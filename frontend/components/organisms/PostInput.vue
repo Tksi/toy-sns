@@ -23,7 +23,7 @@
 <script setup lang="ts">
 const { POST } = useClient();
 const loading = ref<boolean>(false);
-
+const { $postErrorHandler } = useNuxtApp();
 const props = defineProps<{
   message: string;
 }>();
@@ -42,7 +42,7 @@ const onClick = () => {
     loading.value = false;
 
     if (res.error) {
-      alert(res.error);
+      $postErrorHandler(res.error);
     } else {
       emit('then');
     }
