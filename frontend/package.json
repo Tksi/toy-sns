@@ -33,7 +33,6 @@
     "nuxt-vitest": "^0.10.2",
     "openapi-typescript": "^6.5.0",
     "prettier": "^3.0.2",
-    "resize-observer-polyfill": "^1.5.1",
     "vite-plugin-vuetify": "^1.0.2",
     "vitest": "^0.33.0"
   },
