@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import Swal from 'sweetalert2';
+
 const { POST } = useClient();
 const form = ref(false);
 const name = ref('');
@@ -26,7 +28,12 @@ const onSubmit = () => {
     if (res.error) {
       $authErrorHandler(res.error);
     } else {
-      alert('Registered!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Registered!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigateTo('/login');
     }
   });
