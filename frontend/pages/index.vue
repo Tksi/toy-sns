@@ -2,7 +2,7 @@
   <div class="d-flex justify-center align-center flex-column">
     <div class="conatiner">
       <OrganismsPostInput v-model:message="message" @then="onPost" />
-      <div class="posts">
+      <div v-auto-animate class="posts">
         <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
       </div>
     </div>
