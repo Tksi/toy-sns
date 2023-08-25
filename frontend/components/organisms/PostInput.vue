@@ -6,6 +6,7 @@
       variant="solo"
       rows="1"
       auto-grow
+      :loading="loading"
       @input="$emit('update:message', $event.target.value)"
     ></v-textarea>
     <v-btn
@@ -13,6 +14,7 @@
       icon="mdi-send"
       size="small"
       color="black"
+      :loading="loading"
       @click="onClick"
     />
   </div>
@@ -20,6 +22,7 @@
 
 <script setup lang="ts">
 const { POST } = useClient();
+const loading = ref<boolean>(false);
 
 const props = defineProps<{
   message: string;
@@ -30,11 +33,14 @@ const emit = defineEmits<{
 }>();
 
 const onClick = () => {
+  loading.value = true;
   POST('/post', {
     body: {
       content: props.message,
     },
   }).then((res) => {
+    loading.value = false;
+
     if (res.error) {
       alert(res.error);
     } else {

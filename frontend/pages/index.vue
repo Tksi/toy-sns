@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { on } from 'node:events';
 import type { components } from 'types';
 
 const { GET } = useClient();
