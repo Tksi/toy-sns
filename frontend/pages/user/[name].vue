@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center align-center flex-column">
-    <div class="posts">
+    <div v-auto-animate class="posts">
       <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
     </div>
   </div>
