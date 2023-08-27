@@ -9,3 +9,9 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const title = useTitle();
+
+title.value = 'Login';
+</script>

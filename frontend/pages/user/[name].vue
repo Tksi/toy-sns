@@ -1,7 +1,9 @@
 <template>
   <div class="d-flex justify-center align-center flex-column">
-    <div v-auto-animate class="posts">
-      <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
+    <div class="posts-container">
+      <div v-auto-animate class="posts">
+        <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +15,9 @@ const { GET } = useClient();
 const { params } = useRoute();
 const posts = ref<components['schemas']['FindAllResponce'][]>([]);
 const { $postErrorHandler } = useNuxtApp();
+const title = useTitle();
+
+title.value = params.name as string;
 
 const fetchPosts = () => {
   GET('/post/{name}', {
@@ -44,9 +49,13 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.posts {
+.posts-container {
   width: 100dvw;
-  max-width: 300px;
+  max-width: 500px;
+  padding: 0 10px;
+}
+
+.posts {
   border: 1px solid #ccc;
 }
 </style>

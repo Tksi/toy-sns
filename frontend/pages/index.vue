@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center align-center flex-column">
-    <div class="conatiner">
+    <div class="home-container">
       <OrganismsPostInput v-model:message="message" @then="onPost" />
       <div v-auto-animate class="posts">
         <AtomsPost v-for="post in posts" :key="post.id" :post="post" />
@@ -16,6 +16,9 @@ const { GET } = useClient();
 const posts = ref<components['schemas']['FindAllResponce'][]>([]);
 const { $postErrorHandler } = useNuxtApp();
 const message = ref<string>('');
+const title = useTitle();
+
+title.value = 'Home';
 
 const fetchPosts = () => {
   GET('/post', {}).then((res) => {
@@ -46,9 +49,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.container {
+.home-container {
   width: 100vw;
-  max-width: 300px;
+  max-width: 500px;
+  padding: 0 10px;
 }
 .posts {
   border: 1px solid #ccc;
