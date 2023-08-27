@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-center align-center h-screen">
+  <div class="d-flex justify-center align-center h-100">
     <div
       class="d-flex justify-center align-center flex-column"
       style="width: 200px"
