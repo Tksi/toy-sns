@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="post-container">
     <div class="name-container">
       <NuxtLink class="name" :to="`/user/${post.user.name}`">{{
         post.user.name
@@ -22,7 +22,7 @@ defineProps<{
 </script>
 
 <style scoped>
-.container {
+.post-container {
   border: 1px solid #ccc;
 }
 
