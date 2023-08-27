@@ -49,5 +49,6 @@ defineProps<{
 .content {
   font-size: 1.2rem;
   margin: 10px;
+  white-space: pre-wrap;
 }
 </style>
