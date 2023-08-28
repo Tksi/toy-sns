@@ -15,6 +15,12 @@
 const title = useTitle();
 useHead({
   title,
+  meta: [
+    {
+      name: 'robots',
+      content: 'noindex nofollow',
+    },
+  ],
 });
 
 const toHome = () => {
