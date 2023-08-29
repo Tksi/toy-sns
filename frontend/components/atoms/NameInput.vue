@@ -1,10 +1,10 @@
 <template>
   <v-text-field
-    :value="name"
+    :model-value="name"
     label="name"
     variant="underlined"
     :rules="[required]"
-    @input="$emit('update:name', $event.target.value)"
+    @update:model-value="$emit('update:name', $event)"
   ></v-text-field>
 </template>
 

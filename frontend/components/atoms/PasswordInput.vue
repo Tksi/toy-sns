@@ -1,11 +1,11 @@
 <template>
   <v-text-field
-    :value="password"
+    :model-value="password"
     :rules="[required]"
     type="password"
     label="password"
     variant="underlined"
-    @input="$emit('update:password', $event.target.value)"
+    @update:model-value="$emit('update:password', $event)"
   ></v-text-field>
 </template>
 
