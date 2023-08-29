@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <v-textarea
-      :value="message"
+      :model-value="message"
       placeholder="message"
       variant="solo"
       rows="1"
       auto-grow
       :loading="loading"
-      @input="$emit('update:message', $event.target.value)"
+      @update:model-value="$emit('update:message', $event)"
     ></v-textarea>
     <v-btn
       :disabled="message.length === 0"

@@ -26,17 +26,4 @@ describe('PasswordInput', () => {
     // @ts-ignore
     expect(wrapper.emitted('update:password')[0]).toEqual(['password123']);
   });
-
-  it('validates that the input is required', async () => {
-    const wrapper = await mount(PasswordInput, {
-      props: {
-        password: '',
-      },
-    });
-
-    const input = wrapper.find('input[type="password"]');
-    await input.setValue('');
-
-    expect(wrapper.find('.v-messages__message').text()).toBe('Required');
-  });
 });

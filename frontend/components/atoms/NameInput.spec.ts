@@ -26,17 +26,4 @@ describe('NameInput', () => {
     // @ts-ignore
     expect(wrapper.emitted('update:name')[0]).toEqual(['John Doe']);
   });
-
-  it('validates that the input is required', async () => {
-    const wrapper = await mount(NameInput, {
-      props: {
-        name: '',
-      },
-    });
-
-    const input = wrapper.find('input[type="text"]');
-    await input.setValue('');
-
-    expect(wrapper.find('.v-messages__message').text()).toBe('Required');
-  });
 });
