@@ -47,6 +47,7 @@ html {
 }
 
 .swal2-confirm {
+  background-color: inherit !important;
   color: black !important;
   border: solid 1px black !important;
 }
