@@ -50,5 +50,6 @@ defineProps<{
   font-size: 1.2rem;
   margin: 10px;
   white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>
