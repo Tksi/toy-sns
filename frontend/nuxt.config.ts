@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      api: 'http://localhost:4000',
+      api: process.env.NUXT_PUBLIC_API,
     },
   },
   googleFonts: {
