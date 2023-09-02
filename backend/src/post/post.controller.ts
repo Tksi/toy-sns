@@ -1,9 +1,12 @@
+import { type } from 'node:os';
 import {
   Body,
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -69,8 +72,8 @@ export class PostController {
     description: 'Internal server error',
     type: InternalServerError,
   })
-  async findAll() {
-    return this.postService.findAll();
+  async findAll(@Query('page', ParseIntPipe) page: number) {
+    return this.postService.findAll(page);
   }
 
   @Get('/:name')
@@ -94,7 +97,10 @@ export class PostController {
     description: 'Internal server error',
     type: InternalServerError,
   })
-  async findByUser(@Param('name') name: string) {
-    return this.postService.findByUser(name);
+  async findByUser(
+    @Param('name') name: string,
+    @Query('page', ParseIntPipe) page: number,
+  ) {
+    return this.postService.findByUser(name, page);
   }
 }

@@ -6,6 +6,8 @@ import { PrismaService } from '@/prisma.service';
 export class PostService {
   constructor(private prismaService: PrismaService) {}
 
+  private take = 20;
+
   async create(createRequest: CreateRequest, userId: number) {
     await this.prismaService.post.create({
       data: {
@@ -15,8 +17,10 @@ export class PostService {
     });
   }
 
-  async findAll() {
+  async findAll(page: number) {
     return this.prismaService.post.findMany({
+      skip: this.take * (page - 1),
+      take: this.take,
       orderBy: {
         createdAt: 'desc',
       },
@@ -34,8 +38,10 @@ export class PostService {
     });
   }
 
-  async findByUser(name: string) {
+  async findByUser(name: string, page: number) {
     const posts = await this.prismaService.post.findMany({
+      skip: this.take * (page - 1),
+      take: this.take,
       where: {
         user: {
           name,

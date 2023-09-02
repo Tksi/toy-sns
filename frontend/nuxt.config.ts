@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/robots',
   ],
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: false,
   typescript: {
     strict: true,

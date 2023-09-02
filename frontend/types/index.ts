@@ -3,24 +3,25 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
-  '/auth/register': {
+  "/auth/register": {
     /** ユーザ登録 */
-    post: operations['AuthController_register'];
+    post: operations["AuthController_register"];
   };
-  '/auth/login': {
+  "/auth/login": {
     /** ログイン */
-    post: operations['AuthController_login'];
+    post: operations["AuthController_login"];
   };
-  '/post': {
+  "/post": {
     /** 投稿一覧取得 */
-    get: operations['PostController_findAll'];
+    get: operations["PostController_findAll"];
     /** 投稿 */
-    post: operations['PostController_create'];
+    post: operations["PostController_create"];
   };
-  '/post/{name}': {
+  "/post/{name}": {
     /** ユーザの投稿一覧取得 */
-    get: operations['PostController_findByUser'];
+    get: operations["PostController_findByUser"];
   };
 }
 
@@ -88,7 +89,7 @@ export interface components {
        * @example 2021-01-01T00:00:00.000Z
        */
       createdAt: string;
-      user: components['schemas']['User'];
+      user: components["schemas"]["User"];
     };
     NotFound: {
       /** @example Not Found */
@@ -104,14 +105,17 @@ export interface components {
   pathItems: never;
 }
 
+export type $defs = Record<string, never>;
+
 export type external = Record<string, never>;
 
 export interface operations {
+
   /** ユーザ登録 */
   AuthController_register: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['RegisterRequest'];
+        "application/json": components["schemas"]["RegisterRequest"];
       };
     };
     responses: {
@@ -122,19 +126,19 @@ export interface operations {
       /** @description BadRequest */
       400: {
         content: {
-          'application/json': components['schemas']['BadRequest'];
+          "application/json": components["schemas"]["BadRequest"];
         };
       };
       /** @description Conflict */
       401: {
         content: {
-          'application/json': components['schemas']['Conflict'];
+          "application/json": components["schemas"]["Conflict"];
         };
       };
       /** @description Internal server error */
       500: {
         content: {
-          'application/json': components['schemas']['InternalServerError'];
+          "application/json": components["schemas"]["InternalServerError"];
         };
       };
     };
@@ -143,55 +147,60 @@ export interface operations {
   AuthController_login: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['RegisterRequest'];
+        "application/json": components["schemas"]["RegisterRequest"];
       };
     };
     responses: {
       /** @description OK */
       201: {
         content: {
-          'application/json': components['schemas']['LoginResponce'];
+          "application/json": components["schemas"]["LoginResponce"];
         };
       };
       /** @description BadRequest */
       400: {
         content: {
-          'application/json': components['schemas']['BadRequest'];
+          "application/json": components["schemas"]["BadRequest"];
         };
       };
       /** @description Unauthorized */
       401: {
         content: {
-          'application/json': components['schemas']['Unauthorized'];
+          "application/json": components["schemas"]["Unauthorized"];
         };
       };
       /** @description Internal server error */
       500: {
         content: {
-          'application/json': components['schemas']['InternalServerError'];
+          "application/json": components["schemas"]["InternalServerError"];
         };
       };
     };
   };
   /** 投稿一覧取得 */
   PostController_findAll: {
+    parameters: {
+      query: {
+        page: number;
+      };
+    };
     responses: {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['FindAllResponce'][];
+          "application/json": components["schemas"]["FindAllResponce"][];
         };
       };
       /** @description Unauthorized */
       401: {
         content: {
-          'application/json': components['schemas']['Unauthorized'];
+          "application/json": components["schemas"]["Unauthorized"];
         };
       };
       /** @description Internal server error */
       500: {
         content: {
-          'application/json': components['schemas']['InternalServerError'];
+          "application/json": components["schemas"]["InternalServerError"];
         };
       };
     };
@@ -200,7 +209,7 @@ export interface operations {
   PostController_create: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['CreateRequest'];
+        "application/json": components["schemas"]["CreateRequest"];
       };
     };
     responses: {
@@ -211,19 +220,19 @@ export interface operations {
       /** @description BadRequest */
       400: {
         content: {
-          'application/json': components['schemas']['BadRequest'];
+          "application/json": components["schemas"]["BadRequest"];
         };
       };
       /** @description Unauthorized */
       401: {
         content: {
-          'application/json': components['schemas']['Unauthorized'];
+          "application/json": components["schemas"]["Unauthorized"];
         };
       };
       /** @description Internal server error */
       500: {
         content: {
-          'application/json': components['schemas']['InternalServerError'];
+          "application/json": components["schemas"]["InternalServerError"];
         };
       };
     };
@@ -231,6 +240,9 @@ export interface operations {
   /** ユーザの投稿一覧取得 */
   PostController_findByUser: {
     parameters: {
+      query: {
+        page: number;
+      };
       path: {
         /**
          * @description ユーザ名
@@ -243,25 +255,25 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          'application/json': components['schemas']['FindAllResponce'][];
+          "application/json": components["schemas"]["FindAllResponce"][];
         };
       };
       /** @description Unauthorized */
       401: {
         content: {
-          'application/json': components['schemas']['Unauthorized'];
+          "application/json": components["schemas"]["Unauthorized"];
         };
       };
       /** @description Not Found */
       404: {
         content: {
-          'application/json': components['schemas']['NotFound'];
+          "application/json": components["schemas"]["NotFound"];
         };
       };
       /** @description Internal server error */
       500: {
         content: {
-          'application/json': components['schemas']['InternalServerError'];
+          "application/json": components["schemas"]["InternalServerError"];
         };
       };
     };
