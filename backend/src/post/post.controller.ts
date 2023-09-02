@@ -1,4 +1,3 @@
-import { type } from 'node:os';
 import {
   Body,
   Controller,
@@ -63,6 +62,11 @@ export class PostController {
   @ApiOperation({ summary: '投稿一覧取得' })
   @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
   @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
+  @ApiResponse({
     status: 401,
     description: 'Unauthorized',
     type: Unauthorized,
@@ -82,6 +86,11 @@ export class PostController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'ユーザの投稿一覧取得' })
   @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
+  @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized',

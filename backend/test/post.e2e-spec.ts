@@ -75,7 +75,7 @@ describe('PostController (e2e)', () => {
   describe('GET /post', () => {
     it('OK', async () => {
       return request(app.getHttpServer())
-        .get('/post')
+        .get('/post?page=1')
         .set('Authorization', `Bearer ${token}`)
         .expect(200)
         .then((res) => {
@@ -92,7 +92,7 @@ describe('PostController (e2e)', () => {
   describe('GET /post/:name', () => {
     it('OK', async () => {
       return request(app.getHttpServer())
-        .get('/post/test')
+        .get('/post/test?page=1')
         .set('Authorization', `Bearer ${token}`)
         .expect(200)
         .then((res) => {
@@ -103,7 +103,7 @@ describe('PostController (e2e)', () => {
 
     it('NG 存在しないユーザ', async () => {
       return request(app.getHttpServer())
-        .get('/post/test2')
+        .get('/post/test2?page=1')
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
     });
