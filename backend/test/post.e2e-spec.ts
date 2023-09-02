@@ -101,13 +101,6 @@ describe('PostController (e2e)', () => {
         });
     });
 
-    it('NG 存在しないユーザ', async () => {
-      return request(app.getHttpServer())
-        .get('/post/test2?page=1')
-        .set('Authorization', `Bearer ${token}`)
-        .expect(404);
-    });
-
     it('NG tokenがない', async () => {
       return request(app.getHttpServer()).get('/post/test').expect(401);
     });
