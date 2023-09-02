@@ -22,7 +22,6 @@ import { PostService } from './post.service';
 import {
   BadRequest,
   InternalServerError,
-  NotFound,
   Unauthorized,
 } from '@/apiType/error.dto';
 import { AuthGuard } from '@/auth/auth.guard';
@@ -95,11 +94,6 @@ export class PostController {
     status: 401,
     description: 'Unauthorized',
     type: Unauthorized,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Not Found',
-    type: NotFound,
   })
   @ApiResponse({
     status: 500,

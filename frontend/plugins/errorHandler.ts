@@ -43,11 +43,6 @@ export default defineNuxtPlugin(() => {
 
             return;
           }
-          case 404: {
-            navigateTo('/');
-
-            return;
-          }
         }
 
         let errorMessage = error.message;

@@ -63,10 +63,6 @@ export class PostService {
       },
     });
 
-    if (posts.length === 0) {
-      throw new NotFoundException();
-    }
-
     return posts;
   }
 }

@@ -1,13 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class InternalServerError {
-  @ApiProperty({ example: 'Internal Server Error' })
-  message: string;
-
-  @ApiProperty({ example: 500 })
-  statusCode: number;
-}
-
 export class BadRequest {
   @ApiProperty({ example: ['* should not be empty'] })
   message: string[];
@@ -27,6 +19,14 @@ export class Unauthorized {
   statusCode: number;
 }
 
+export class NotFound {
+  @ApiProperty({ example: 'Not Found' })
+  message: string;
+
+  @ApiProperty({ example: 404 })
+  statusCode: number;
+}
+
 export class Conflict {
   @ApiProperty({ example: 'Conflict' })
   message: string;
@@ -35,10 +35,10 @@ export class Conflict {
   statusCode: number;
 }
 
-export class NotFound {
-  @ApiProperty({ example: 'Not Found' })
+export class InternalServerError {
+  @ApiProperty({ example: 'Internal Server Error' })
   message: string;
 
-  @ApiProperty({ example: 404 })
+  @ApiProperty({ example: 500 })
   statusCode: number;
 }
