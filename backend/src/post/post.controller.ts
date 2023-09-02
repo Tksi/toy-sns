@@ -3,7 +3,9 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -60,6 +62,11 @@ export class PostController {
   @ApiOperation({ summary: '投稿一覧取得' })
   @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
   @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
+  @ApiResponse({
     status: 401,
     description: 'Unauthorized',
     type: Unauthorized,
@@ -69,8 +76,8 @@ export class PostController {
     description: 'Internal server error',
     type: InternalServerError,
   })
-  async findAll() {
-    return this.postService.findAll();
+  async findAll(@Query('page', ParseIntPipe) page: number) {
+    return this.postService.findAll(page);
   }
 
   @Get('/:name')
@@ -79,6 +86,11 @@ export class PostController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'ユーザの投稿一覧取得' })
   @ApiResponse({ status: 200, description: 'OK', type: [FindAllResponce] })
+  @ApiResponse({
+    status: 400,
+    description: 'BadRequest',
+    type: BadRequest,
+  })
   @ApiResponse({
     status: 401,
     description: 'Unauthorized',
@@ -94,7 +106,10 @@ export class PostController {
     description: 'Internal server error',
     type: InternalServerError,
   })
-  async findByUser(@Param('name') name: string) {
-    return this.postService.findByUser(name);
+  async findByUser(
+    @Param('name') name: string,
+    @Query('page', ParseIntPipe) page: number,
+  ) {
+    return this.postService.findByUser(name, page);
   }
 }

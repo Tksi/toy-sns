@@ -1,6 +1,6 @@
 # toy-sns
 
-🐤 A toy SNS with Nest.js &amp; Nuxt3
+🐤 A toy SNS with NestJS &amp; Nuxt3
 
 # setup
 
