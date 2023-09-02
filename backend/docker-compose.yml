@@ -1,5 +1,5 @@
 services:
-  backend:
+  toy-sns:
     image: node
     volumes:
       - .:/app
@@ -11,4 +11,4 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     depends_on:
-      - backend
+      - toy-sns
