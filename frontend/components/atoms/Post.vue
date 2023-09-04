@@ -8,7 +8,9 @@
         $timeAgo().format(new Date(post.createdAt))
       }}</small>
     </div>
-    <pre class="content">{{ post.content }}</pre>
+    <div class="content">
+      <AtomsMarkDown :src="post.content" />
+    </div>
   </div>
 </template>
 
@@ -49,7 +51,6 @@ defineProps<{
 .content {
   font-size: 1.2rem;
   margin: 10px;
-  white-space: pre-wrap;
   word-break: break-all;
 }
 </style>

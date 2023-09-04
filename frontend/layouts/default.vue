@@ -42,6 +42,20 @@ const logout = () => {
   box-sizing: border-box;
 }
 
+ul > li {
+  list-style: '• ' inside;
+}
+
+ol > li {
+  list-style: decimal inside;
+}
+
+code {
+  background-color: rgb(239, 239, 239);
+  border-radius: 0.3em;
+  padding: 0.15em 0.2em;
+}
+
 html {
   font-family: 'Noto Sans JP', sans-serif;
 }
