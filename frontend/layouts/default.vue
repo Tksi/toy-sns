@@ -42,6 +42,49 @@ const logout = () => {
   box-sizing: border-box;
 }
 
+ul > li {
+  list-style: '• ' inside;
+}
+
+ol > li {
+  list-style: decimal inside;
+}
+
+code {
+  background-color: rgb(239, 239, 239);
+  border-radius: 0.3em;
+  padding: 0.15em 0.2em;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding: 0 0.25rem;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+table td {
+  padding: 0 0.25rem;
+  border: 1px solid #ddd;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+ul li {
+  margin-left: 0.25rem;
+}
+
+li ul li {
+  margin-left: 0.75rem;
+}
+
 html {
   font-family: 'Noto Sans JP', sans-serif;
 }
