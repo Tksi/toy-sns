@@ -12,9 +12,7 @@
 defineProps<{
   name: string;
 }>();
-defineEmits<{
-  'update:name': [];
-}>();
+defineEmits<{ 'update:name': [event: string] }>();
 
 const required = (v: string) => !!v || 'Required';
 </script>

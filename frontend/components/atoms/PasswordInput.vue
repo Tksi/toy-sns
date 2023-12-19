@@ -14,7 +14,7 @@ defineProps<{
   password: string;
 }>();
 defineEmits<{
-  'update:password': [];
+  'update:password': [event: string];
 }>();
 
 const required = (v: string) => !!v || 'Required';

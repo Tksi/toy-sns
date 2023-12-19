@@ -28,7 +28,7 @@ const props = defineProps<{
   message: string;
 }>();
 const emit = defineEmits<{
-  'update:message': [];
+  'update:message': [event: string];
   then: [];
 }>();
 
