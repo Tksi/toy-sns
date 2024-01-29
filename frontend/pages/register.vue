@@ -13,5 +13,5 @@
 <script setup lang="ts">
 const title = useTitle();
 
-title.value = 'Rregister';
+title.value = 'Register';
 </script>
